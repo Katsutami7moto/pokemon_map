@@ -22,4 +22,8 @@ class PokemonEntity(models.Model):
     stamina = models.IntegerField(null=True, blank=True)
 
     def __str__(self):
-        return f'Lat: {self.latitude}, Lon: {self.longitude}'
+        str_ = (
+            f'{self.pokemon.title} LVL {self.level}, '
+            f'Lat: {self.latitude}, Lon: {self.longitude}'
+        )
+        return str_
