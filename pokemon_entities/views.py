@@ -1,12 +1,8 @@
 import folium
-import json
-
-from django.http import HttpResponseNotFound
 from django.shortcuts import render
 from django.utils.timezone import localtime
 
 from .models import Pokemon, PokemonEntity
-
 
 MOSCOW_CENTER = [55.751244, 37.618423]
 DEFAULT_IMAGE_URL = (
@@ -77,9 +73,10 @@ def show_pokemon(request, pokemon_id):
         'title_ru': requested_pokemon.title,
         'title_en': '',
         'title_jp': '',
-        'description': '',
+        'description': requested_pokemon.description,
         'img_url': requested_pokemon.image.url
     }
     return render(request, 'pokemon.html', context={
-        'map': folium_map._repr_html_(), 'pokemon': shown_pokemon
+        'map': folium_map._repr_html_(),
+        'pokemon': shown_pokemon
     })
