@@ -1,6 +1,6 @@
 import folium
 from django.http import HttpRequest
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.utils.timezone import localtime
 
 from .models import Pokemon, PokemonEntity
@@ -56,7 +56,7 @@ def show_all_pokemons(request: HttpRequest):
 
 
 def show_pokemon(request: HttpRequest, pokemon_id):
-    requested_pokemon = Pokemon.objects.get(id=pokemon_id)
+    requested_pokemon = get_object_or_404(Pokemon, id=pokemon_id)
     local_now = localtime()
     shown_pokemon_entities = requested_pokemon.entities.filter(
         appeared_at__lte=local_now,
